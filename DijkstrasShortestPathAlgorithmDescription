@@ -1,0 +1,51 @@
+(NOTE: The GraphM class in this project contains the implementation for Dijkstra's
+Shortest Path Algorithm and the GraphL class contains the implementation for the Depth First
+Search Algorithm)
+
+Part 1) Dijkstra's Shortest Path Algorithm:
+
+This project is to implement Dijkstra's shortest path algorithm. Your code should be able to read
+a data file consisting of many lines (an example file called data31.txt will be given, explained
+below) and will be able to find the lowest cost paths (findShortestPath function) and display
+the cost and path from every node to every other node (displayAll function). Another display
+routine (display function) will output one path in detail.
+
+In the input data (e.g., data31.txt), the first line tells the number of nodes, say n, followed by
+a text description of each of the 1 through n nodes, one description per line (50 chars max length).
+After that, each line consists of 3 integers representing an edge. If there is an edge from node 1
+to node 2 with a label of 10, the data is: 1 2 10. If the first integer is zero, it means the end
+of the data for that one graph. There may be several graphs, each having at most 100 nodes.
+
+Develop the class:
+(1) Class attributes include an array of NodeData (nodedata.h and nodedata.cpp will be given), 
+the adjacency matrix, number of nodes, and TableType array.
+
+class GraphM {
+  public:
+  . . .
+  private:
+    NodeData data[MAXNODES];          // data for graph nodes
+    int C[MAXNODES][MAXNODES];        // cost array, the adjacency matrix
+    int size;                         // number of nodes in the graph
+    TableType T[MAXNODES][MAXNODES]   // stores visited, distance, path
+};
+
+TableType is a struct to keep the current shortest distance (and associated path info) known
+at any point in the algorithm.
+
+struct TableType {
+  bool visited;   // whether node has been visited
+  int dist;       // shortest distance from source known so far
+  int path;       // previous node in path of min dist
+};
+
+T is a 2-dimensional array of structs because we want to work on from all nodes to all other nodes.
+
+Methods that must be implemented in the GraphM class:
+(1) Constructor
+(2) buildGraph
+(3) insertEdge
+(4) removeEdge
+(5) findShortestPath
+(6) displayAll
+(7) display
